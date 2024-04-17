@@ -11,11 +11,13 @@ pub fn getPrompt(allocator: std.mem.Allocator) ![]const u8 {
     return str_copy;
 }
 
+pub fn getArea(radio: f32) f32 {
+    const PI: f32 = 3.14;
+    return PI * radio * radio;
+}
+
 pub fn main() !void {
     const allocator = std.heap.page_allocator;
-
-    var area: f32 = 0;
-    const PI: f32 = 3.14;
 
     std.debug.print("Enter radio: ", .{});
 
@@ -23,7 +25,7 @@ pub fn main() !void {
     defer allocator.free(str_radio);
     const radio = try std.fmt.parseFloat(f32, str_radio);
 
-    area = PI * radio * radio;
+    const area = getArea(radio);
 
     std.debug.print("The area is: {d:}\n", .{area});
 }
